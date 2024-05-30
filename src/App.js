@@ -6,6 +6,8 @@ import Orders from './pages/Orders';
 import Customers from './pages/Customers';
 import NotFound from './pages/NotFound';
 import NavBar from './components/NavBar';
+import ProductDetails from './pages/ProductDetails';
+import AddProduct from './pages/AddProduct';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/addproducts" element={<AddProduct />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/customers" element={<Customers />} />
         <Route path="*" element={<NotFound />} />
