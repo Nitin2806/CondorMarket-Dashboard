@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
@@ -15,24 +15,30 @@ import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const token = localStorage.getItem('token');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
     setIsLoggedIn(false);
   };
 
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem('token'));
+  }, []);
+
   return (
     <Router>
-        <NavBar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      <NavBar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <Routes>
-      <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={token ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/products" element={<ProtectedRoute element={<Products />} />} />
         <Route path="/products/:id" element={<ProtectedRoute element={<ProductDetails />} />} />
         <Route path="/addproducts" element={<ProtectedRoute element={<AddProduct />} />} />

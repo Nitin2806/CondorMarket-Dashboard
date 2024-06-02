@@ -19,20 +19,18 @@ const Login = ({ handleLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      handleLogin();
-    } catch (err) {
-    }
     setError('');
 
     try {
       const response = await axios.post('http://localhost:5000/users/login', { email, password });
-      console.log(response.data)
+      console.log(response.data);
       
       const { token, user } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('email', user.email);
       localStorage.setItem('username', user.username);
+      
+      handleLogin();
       navigate('/products');
     } catch (err) {
       console.error(err);
@@ -40,7 +38,6 @@ const Login = ({ handleLogin }) => {
     }
   };
 
-  // Function to navigate to the registration page
   const handleCreateAccount = () => {
     navigate('/register');
   };

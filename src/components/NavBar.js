@@ -24,7 +24,10 @@ const NavBar = ({ isLoggedIn, handleLogout }) => {
           Users
         </Button>
         {isLoggedIn ? (
-          <div>Welcome, {username}! <Button color="inherit" onClick={handleLogout}>Logout</Button></div>
+          <div>
+            Welcome, {username}! 
+            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+          </div>
         ) : (
           <Button color="inherit" component={Link} to="/login">
             Login
