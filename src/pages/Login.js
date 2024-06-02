@@ -31,7 +31,7 @@ const Login = ({ handleLogin }) => {
       localStorage.setItem('username', user.username);
       
       handleLogin();
-      navigate('/products');
+      navigate('/home');
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || 'Login failed');

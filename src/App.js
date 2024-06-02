@@ -38,7 +38,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/home" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/products" element={<ProtectedRoute element={<Products />} />} />
         <Route path="/products/:id" element={<ProtectedRoute element={<ProductDetails />} />} />
         <Route path="/addproducts" element={<ProtectedRoute element={<AddProduct />} />} />
