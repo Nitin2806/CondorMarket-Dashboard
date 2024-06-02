@@ -1,4 +1,3 @@
-// src/pages/Dashboard.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Paper, Typography, Button } from '@mui/material';
