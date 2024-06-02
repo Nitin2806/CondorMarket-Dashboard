@@ -30,10 +30,10 @@ function Dashboard() {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Paper elevation={3} style={{ padding: '16px', textAlign: 'center' }}>
-            <Typography variant="h6">Customers</Typography>
-            <Typography>View and manage customers</Typography>
-            <Button component={Link} to="/customers" variant="contained" color="primary" style={{ marginTop: '8px' }}>
-              Go to Customers
+            <Typography variant="h6">Users</Typography>
+            <Typography>View and manage users</Typography>
+            <Button component={Link} to="/users" variant="contained" color="primary" style={{ marginTop: '8px' }}>
+              Go to Users
             </Button>
           </Paper>
         </Grid>

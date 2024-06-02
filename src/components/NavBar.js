@@ -2,7 +2,9 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-function NavBar() {
+const NavBar = ({ isLoggedIn, handleLogout }) => {
+  const username = isLoggedIn ? localStorage.getItem('username') : null;
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -18,9 +20,16 @@ function NavBar() {
         <Button color="inherit" component={Link} to="/orders">
           Orders
         </Button>
-        <Button color="inherit" component={Link} to="/customers">
-          Customers
+        <Button color="inherit" component={Link} to="/users">
+          Users
         </Button>
+        {isLoggedIn ? (
+          <div>Welcome, {username}! <Button color="inherit" onClick={handleLogout}>Logout</Button></div>
+        ) : (
+          <Button color="inherit" component={Link} to="/login">
+            Login
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   );

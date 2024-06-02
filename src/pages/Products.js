@@ -13,7 +13,7 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/products/');
+      const response = await axios.get('https://localhost:5000/products/');
       setProducts(response.data);
     } catch (err) {
       console.error(err);
@@ -22,7 +22,7 @@ const Products = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://condormarket-backend.onrender.com/products/${id}`);
+      await axios.delete(`https://localhost:5000/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.error(err);
