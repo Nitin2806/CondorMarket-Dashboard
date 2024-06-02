@@ -7,7 +7,7 @@ function Dashboard() {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Dashboard
+        Welcome to Condor Market!
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={3}>
