@@ -13,7 +13,7 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('https://localhost:5000/products/');
+      const response = await axios.get('http://localhost:5000/products/');
       setProducts(response.data);
     } catch (err) {
       console.error(err);
@@ -22,11 +22,18 @@ const Products = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://localhost:5000/products/${id}`);
+      await axios.delete(`http://localhost:5000/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const trimDescription = (description) => {
+    if (description.length > 90) {
+      return description.substring(0, 90) + '...';
+    }
+    return description;
   };
 
   return (
@@ -51,10 +58,10 @@ const Products = () => {
             {products.map((product) => (
               <TableRow key={product._id}>
                 <TableCell>{product.name}</TableCell>
-                <TableCell>{product.description}</TableCell>
+                <TableCell>{trimDescription(product.description)}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>
-                <Button onClick={() => navigate(`/products/${product._id}`)}>Edit</Button>
+                  <Button onClick={() => navigate(`/products/${product._id}`)}>Edit</Button>
                   <Button onClick={() => handleDelete(product._id)}>Delete</Button>
                 </TableCell>
               </TableRow>
