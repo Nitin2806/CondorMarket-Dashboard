@@ -1,70 +1,149 @@
-# Getting Started with Create React App
+# CondorMarket
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+**CondorMarket** is a full-fledged e-commerce web application designed to manage products, orders, and customers. This application provides a comprehensive solution for online marketplace management with features like product listing, order management, customer management, and user authentication.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **User Authentication**: Secure login and registration with encrypted passwords.
+- **Product Management**: Add, edit, delete, and view products with detailed specifications and images.
+- **Order Management**: Create, edit, delete, and view orders with detailed information about each order.
+- **Customer Management**: Manage customer details and view customer orders.
+- **Responsive Design**: User-friendly interface with Material-UI components.
+- **Protected Routes**: Access control to protect routes and ensure secure operations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**: React, Material-UI
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Tokens)
+- **Styling**: CSS, Material-UI
 
-### `npm test`
+## Setup and Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js
+- MongoDB
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the repository**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```sh
+   git clone https://github.com/yourusername/CondorMarket.git
+   cd CondorMarket
+Install backend dependencies
 
-### `npm run eject`
+sh
+Copy code
+cd backend
+npm install
+Install frontend dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+sh
+Copy code
+cd ../frontend
+npm install
+Environment Variables
+Create a .env file in the backend directory and add the following variables:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+env
+Copy code
+MONGO_URI=mongodb://localhost:27017/your-database-name
+JWT_SECRET=your_jwt_secret
+Running the Application
+Start the backend server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+sh
+Copy code
+cd backend
+npm start
+The backend server will start on http://localhost:5000.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Start the frontend server
 
-## Learn More
+sh
+Copy code
+cd ../frontend
+npm start
+The frontend server will start on http://localhost:3000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Usage
+User Authentication
+Register: Users can register by providing a username, email, password, and other details.
+Login: Users can log in using their email and password. Upon successful login, a JWT token is stored in the local storage.
+Product Management
+View Products: List all available products with details like name, description, price, and specifications.
+Add Product: Add new products with various categories and options.
+Edit Product: Update product details.
+Delete Product: Remove products from the list.
+Order Management
+View Orders: List all orders with details like customer information, items, total amount, and status.
+Add Order: Create new orders with product details and customer information.
+Edit Order: Update order status and details.
+Delete Order: Remove orders from the list.
+Customer Management
+View Customers: List all customers with their details.
+Manage Customer Orders: View orders placed by each customer.
+Project Structure
+java
+Copy code
+CondorMarket/
+│
+├── backend/
+│   ├── models/
+│   │   ├── orderModel.js
+│   │   ├── productModel.js
+│   │   └── userModel.js
+│   ├── routes/
+│   │   ├── orderRoutes.js
+│   │   ├── productRoutes.js
+│   │   └── userRoutes.js
+│   ├── controllers/
+│   ├── config/
+│   ├── middleware/
+│   ├── .env
+│   ├── server.js
+│   └── package.json
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   │   ├── AddProduct.js
+│   │   │   ├── Customers.js
+│   │   │   ├── Dashboard.js
+│   │   │   ├── Login.js
+│   │   │   ├── OrderDetails.js
+│   │   │   ├── Orders.js
+│   │   │   ├── ProductDetails.js
+│   │   │   ├── Products.js
+│   │   │   └── Register.js
+│   │   ├── context/
+│   │   ├── App.js
+│   │   └── index.js
+│   ├── .env
+│   └── package.json
+│
+└── README.md
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+API Endpoints
+Product Routes
+GET /products: Get all products
+POST /products: Add a new product
+GET /products/:id: Get a product by ID
+PUT /products/:id: Update a product by ID
+DELETE /products/:id: Delete a product by ID
+Order Routes
+GET /orders: Get all orders
+POST /orders: Add a new order
+GET /orders/:id: Get an order by ID
+PUT /orders/:id: Update an order by ID
+DELETE /orders/:id: Delete an order by ID
+User Routes
+POST /register: Register a new user
+POST /login: Login a user
