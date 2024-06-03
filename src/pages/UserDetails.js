@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../services/api'; 
 import { Container, Typography, Paper, TextField, Button, Grid,MenuItem } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ const UserDetails = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/users/${id}`); 
+      const response = await api.get(`/users/${id}`); 
       setUser(response.data);
     } catch (err) {
       console.error(err);
@@ -33,7 +33,7 @@ const UserDetails = () => {
     e.preventDefault();
     try {
       console.log(user)
-      await axios.put(`http://localhost:5000/users/${id}`, user); 
+      await api.put(`/users/${id}`, user); 
       navigate('/users');
     } catch (err) {
       console.error(err);

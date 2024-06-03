@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../services/api'; 
 import { Container, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/orders');
+      const response = await api.get('/orders');
       setOrders(response.data);
     } catch (err) {
       console.error(err);
@@ -22,7 +22,7 @@ const Orders = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/orders/${id}`);
+      await api.delete(`/orders/${id}`);
       fetchOrders();
     } catch (err) {
       console.error(err);

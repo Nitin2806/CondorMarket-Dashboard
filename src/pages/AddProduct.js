@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api'; 
 import { Container, Paper, Typography, TextField, Button, MenuItem, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -56,7 +56,7 @@ const AddProduct = () => {
   const handleAddProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/products', formData);
+      await api.post('/products', formData);
       navigate('/products');
     } catch (err) {
       console.error(err);

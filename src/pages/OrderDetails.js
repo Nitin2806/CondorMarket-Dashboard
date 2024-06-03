@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../services/api'; 
 import { Container, Typography, Paper, TextField,MenuItem,Select, Button, Grid } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ const OrderDetails = () => {
 
   const fetchOrder = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/orders/${id}`);
+      const response = await api.get(`/orders/${id}`);
       setOrder(response.data);
     } catch (err) {
       console.error(err);
@@ -32,7 +32,7 @@ const OrderDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/orders/${id}`, order);
+      await api.put(`/orders/${id}`, order);
       navigate('/orders');
     } catch (err) {
       console.error(err);

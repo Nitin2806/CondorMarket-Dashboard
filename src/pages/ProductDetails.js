@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api'; 
 import { Container, Typography, Paper, List, ListItem, ListItemText, TextField, Button, Divider } from '@mui/material';
 
 const ProductDetails = () => {
@@ -21,7 +21,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/products/${id}`);
+        const response = await api.get(`/products/${id}`);
         setProduct(response.data);
         setFormData({
           name: response.data.name,
@@ -63,7 +63,7 @@ const ProductDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/products/${id}`, formData);
+      await api.put(`/products/${id}`, formData);
       alert('Product updated successfully');
     } catch (error) {
       console.error('Error updating product:', error);

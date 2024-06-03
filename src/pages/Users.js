@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../services/api'; 
 import { Container, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const Users = () => {
 
   const fetchusers = async () => {
     try {                                                                                                                                                                                                                                                                                   
-      const response = await axios.get('http://localhost:5000/users/profiles');
+      const response = await api.get('/users/profiles');
       setusers(response.data);
     } catch (err) {
       console.error(err);
@@ -22,7 +22,7 @@ const Users = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://localhost:5000/users/${id}`);
+      await api.delete(`/users/${id}`);
       alert('User deleted successfully');
       fetchusers();
     } catch (err) {
