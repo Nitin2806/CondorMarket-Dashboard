@@ -31,11 +31,9 @@
 
 **Clone the repository**
 
-      ``` sh
       git clone https://github.com/Nitin2806/CondorMarket-dashboard.git
       cd CondorMarket-dashboard
       npm i or npm install
-
 
 ## Running the Application
 
@@ -71,8 +69,6 @@ The server will start on http://localhost:3000.
 
 
 ## Project Structure
-
-      ``` sh
 
       CondorMarket-Dashboard/
       ├── public/
