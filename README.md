@@ -9,17 +9,16 @@
 - **User Authentication**: Secure login and registration with encrypted passwords.
 - **Product Management**: Add, edit, delete, and view products with detailed specifications and images.
 - **Order Management**: Create, edit, delete, and view orders with detailed information about each order.
-- **Customer Management**: Manage customer details and view customer orders.
-- **Responsive Design**: User-friendly interface with Material-UI components.
+- **User Management**: Manage customer details and view customer orders.
+- **Responsive Design**: User-friendly interface with Bootstrap components.
 - **Protected Routes**: Access control to protect routes and ensure secure operations.
 
 ## Technologies Used
 
-- **Frontend**: React, Material-UI
+- **Frontend**: React, Bootstrap
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
-- **Authentication**: JWT (JSON Web Tokens)
-- **Styling**: CSS, Material-UI
+- **Styling**: CSS, Bootstrap
 
 ## Setup and Installation
 
@@ -33,8 +32,9 @@
 **Clone the repository**
 
       ``` sh
-      git clone https://github.com/Nitin2806/CondorMarket.git
-      cd CondorMarket
+      git clone https://github.com/Nitin2806/CondorMarket-dashboard.git
+      cd CondorMarket-dashboard
+      npm i or npm install
 
 
 ## Running the Application
@@ -45,7 +45,7 @@ Start the server
 
       npm start
       
-The frontend server will start on http://localhost:3000.
+The server will start on http://localhost:3000.
 
 ## Usage
 
@@ -67,9 +67,9 @@ The frontend server will start on http://localhost:3000.
   - Edit Order: Update order status and details.
   - Delete Order: Remove orders from the list.
 
-- **Customer Management**
-  - View Customers: List all customers with their details.
-  - Manage Customer Orders: View orders placed by each customer.
+- **User Management**
+  - View Users: List all customers with their details.
+  - Manage User Orders: View orders placed by each user.
 
 
 ## Project Structure
@@ -127,4 +127,3 @@ The frontend server will start on http://localhost:3000.
 - **User Routes**
   - POST /register: Register a new user
   - POST /login: Login a user
-
