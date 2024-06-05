@@ -41,8 +41,6 @@
 
 Start the server
 
-      ``` sh
-
       npm start
       
 The server will start on http://localhost:3000.
