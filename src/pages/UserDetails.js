@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api'; 
-import { Container, Typography, Paper, TextField, Button, Grid,MenuItem } from '@mui/material';
+import { Container, Table, Button, Modal } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const UserDetails = () => {
@@ -44,79 +44,32 @@ const UserDetails = () => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Edit User
-      </Typography>
-      <Paper style={{ padding: 16 }}>
+      <h4>Edit User</h4>
+      <div style={{ padding: 16 }}>
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Username"
-                name="username"
-                value={user.username}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Email"
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="First Name"
-                name="firstName"
-                value={user.firstName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Last Name"
-                name="lastName"
-                value={user.lastName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Address"
-                name="address"
-                value={user.address}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                select
-                fullWidth
-                label="Account Type"
-                name="accountType"
-                value={user.accountType}
-                onChange={handleChange}
-              >
-                <MenuItem value="customer">Customer</MenuItem>
-                <MenuItem value="vendor">Vendor</MenuItem>
-                <MenuItem value="admin">Admin</MenuItem>
-              </TextField>
-            </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary">
-                Save
-              </Button>
-            </Grid>
-          </Grid>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Username</label>
+            <input type="text" className="form-control" id="username" name="username" value={user.username} onChange={handleChange} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input type="email" className="form-control" id="email" name="email" value={user.email} onChange={handleChange} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="firstName" className="form-label">First Name</label>
+            <input type="text" className="form-control" id="firstName" name="firstName" value={user.firstName} onChange={handleChange} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="lastName" className="form-label">Last Name</label>
+            <input type="text" className="form-control" id="lastName" name="lastName" value={user.lastName} onChange={handleChange} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="address" className="form-label">Address</label>
+            <input type="text" className="form-control" id="address" name="address" value={user.address} onChange={handleChange} />
+          </div>
+          <Button type="submit" variant="primary" className="mb-3">Save</Button>
         </form>
-      </Paper>
+      </div>
     </Container>
   );
 };

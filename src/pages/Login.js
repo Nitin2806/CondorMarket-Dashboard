@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Paper, Grid } from '@mui/material'; 
+import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api'; 
+import api from '../services/api';
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
@@ -24,12 +24,12 @@ const Login = ({ handleLogin }) => {
     try {
       const response = await api.post('/users/login', { email, password });
       console.log(response.data);
-      
+
       const { token, user } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('email', user.email);
       localStorage.setItem('username', user.username);
-      
+
       handleLogin();
       navigate('/home');
     } catch (err) {
@@ -43,54 +43,43 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
-        <Typography component="h1" variant="h5" gutterBottom>
-          Sign In
-        </Typography>
-        {error && <Typography color="error">{error}</Typography>}
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+    <Container className="mt-5">
+      <Card>
+        <Card.Body>
+          <h1 className="mb-4">Sign In</h1>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicEmail" className="mb-3">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
                 value={email}
                 onChange={handleEmailChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
                 required
-                fullWidth
-                name="password"
-                label="Password"
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword" className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
                 type="password"
-                id="password"
-                autoComplete="current-password"
+                placeholder="Password"
                 value={password}
                 onChange={handlePasswordChange}
+                required
               />
-            </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" fullWidth variant="contained" color="primary">
-                Sign In
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button fullWidth variant="outlined" color="secondary" onClick={handleCreateAccount}>
-                Create Account
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Paper>
+            </Form.Group>
+
+            <Button variant="primary" type="submit" className="w-100 mb-2">
+              Sign In
+            </Button>
+            <Button variant="outline-secondary" className="w-100" onClick={handleCreateAccount}>
+              Create Account
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </Container>
   );
 };

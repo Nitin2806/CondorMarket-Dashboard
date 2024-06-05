@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Container, Table, Button, Modal } from 'react-bootstrap';
 import api from '../services/api'; 
-import { Container, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteProductId, setDeleteProductId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +26,7 @@ const Products = () => {
     try {
       await api.delete(`/products/${id}`);
       fetchProducts();
+      setShowDeleteModal(false);
     } catch (err) {
       console.error(err);
     }
@@ -36,39 +39,60 @@ const Products = () => {
     return description;
   };
 
+  const handleShowDeleteModal = (id) => {
+    setShowDeleteModal(true);
+    setDeleteProductId(id);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Products
-      </Typography>
-      <Button variant="contained" color="primary" onClick={() => navigate('/addproducts')}>
+      <h4>Products</h4>
+      <Button variant="primary" onClick={() => navigate('/addproducts')}>
         Add Product
       </Button>
-      <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((product) => (
-              <TableRow key={product._id}>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>{trimDescription(product.description)}</TableCell>
-                <TableCell>{product.price}</TableCell>
-                <TableCell>
-                  <Button onClick={() => navigate(`/products/${product._id}`)}>Edit</Button>
-                  <Button onClick={() => handleDelete(product._id)}>Delete</Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product._id}>
+              <td>{product.name}</td>
+              <td>{trimDescription(product.description)}</td>
+              <td>{product.price}</td>
+              <td>
+                <Button variant="info" onClick={() => navigate(`/products/${product._id}`)}>Edit</Button>
+                <Button variant="danger" onClick={() => handleShowDeleteModal(product._id)}>Delete</Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this product?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={() => handleDelete(deleteProductId)}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

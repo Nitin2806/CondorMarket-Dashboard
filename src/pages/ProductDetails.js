@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../services/api'; 
-import { Container, Typography, Paper, List, ListItem, ListItemText, TextField, Button, Divider } from '@mui/material';
+import { Container, ListGroup, Button, Form } from 'react-bootstrap';
+import api from '../services/api';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -74,103 +74,45 @@ const ProductDetails = () => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Product Details
-      </Typography>
-      <Paper style={{ padding: 16 }}>
-        <List>
-          <ListItem>
-            <ListItemText primary="Category" secondary={product.category} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Image" secondary={product.image} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Brand" secondary={product.brand} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Price" secondary={`$${product.price}`} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Description" secondary={product.description} />
-          </ListItem>
-          <Divider />
-          <Typography variant="h6" gutterBottom style={{ paddingLeft: 16, paddingTop: 16 }}>
-            Specifications
-          </Typography>
-          {Object.keys(product.specifications).map((specKey) => (
-            <ListItem key={specKey}>
-              <ListItemText primary={specKey} secondary={product.specifications[specKey]} />
-            </ListItem>
-          ))}
-          <ListItem>
-            <ListItemText primary="Stock" secondary={product.stock} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Ratings" secondary={product.ratings} />
-          </ListItem>
-          <Divider />
-          <Typography variant="h6" gutterBottom style={{ paddingLeft: 16, paddingTop: 16 }}>
-            Reviews
-          </Typography>
-          {product.reviews.map((review) => (
-            <ListItem key={review._id}>
-              <ListItemText primary={review.user} secondary={`${review.comment} - ${review.rating} stars`} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <form onSubmit={handleSubmit} style={{ marginTop: 16 }}>
-          <TextField
-            label="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-           <TextField
-            label="Image URL"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Price"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Brand"
-            name="brand"
-            value={formData.brand}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          {Object.keys(formData.specifications).map((specKey) => (
-            <TextField
+      <h4>Product Details</h4>
+      <ListGroup>
+        <ListGroup.Item><strong>Category:</strong> {product.category}</ListGroup.Item>
+        <ListGroup.Item><strong>Image:</strong> {product.image}</ListGroup.Item>
+        <ListGroup.Item><strong>Brand:</strong> {product.brand}</ListGroup.Item>
+        <ListGroup.Item><strong>Price:</strong> ${product.price}</ListGroup.Item>
+        <ListGroup.Item><strong>Description:</strong> {product.description}</ListGroup.Item>
+      </ListGroup>
+      <h6 style={{ marginTop: '1rem' }}>Specifications</h6>
+      <ListGroup>
+        {Object.entries(product.specifications).map(([specKey, value]) => (
+          <ListGroup.Item key={specKey}><strong>{specKey}:</strong> {value}</ListGroup.Item>
+        ))}
+        <ListGroup.Item><strong>Stock:</strong> {product.stock}</ListGroup.Item>
+        <ListGroup.Item><strong>Ratings:</strong> {product.ratings}</ListGroup.Item>
+      </ListGroup>
+      <h4 style={{ marginTop: '1rem' }}>Reviews</h4>
+      <ListGroup>
+        {product.reviews.map((review) => (
+          <ListGroup.Item key={review._id}><strong>{review.user}</strong> - {review.comment} - {review.rating} stars</ListGroup.Item>
+        ))}
+      </ListGroup>
+      <Form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
+        <Form.Group controlId="formName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} />
+        </Form.Group>
+        <Form.Group controlId="formImage">
+          <Form.Label>Image URL</Form.Label>
+          <Form.Control type="text" name="image" value={formData.image} onChange={handleChange} />
+        </Form.Group>
+        <Form.Group controlId="formDescription">
+          <Form.Label>Description</Form.Label>
+          <Form.Control as="textarea" rows={3} name="description" value={formData.description} onChange={handleChange} />
+        </Form.Group>
+        {Object.keys(formData.specifications).map((specKey) => (
+           <Form.Group>
+          <Form.Label>{specKey}</Form.Label>
+            <Form.Control
               key={specKey}
               label={specKey}
               name={specKey}
@@ -179,28 +121,12 @@ const ProductDetails = () => {
               fullWidth
               margin="normal"
             />
+            </Form.Group>
           ))}
-          <TextField
-            label="Stock"
-            name="stock"
-            value={formData.stock}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Ratings"
-            name="ratings"
-            value={formData.ratings}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <Button type="submit" variant="contained" color="primary" style={{ marginTop: 16 }}>
-            Update Product
-          </Button>
-        </form>
-      </Paper>
+        <Button variant="primary" type="submit">
+          Update Product
+        </Button>
+      </Form>
     </Container>
   );
 };

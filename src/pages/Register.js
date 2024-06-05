@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Paper, Grid, MenuItem } from '@mui/material';
+import { Container, Typography, Form, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api'; 
 
@@ -36,127 +36,53 @@ const Register = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
-        <Typography component="h1" variant="h5" gutterBottom>
-          Register
-        </Typography>
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
-                value={formData.username}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                type="date"
-                id="dateOfBirth"
-                label="Date of Birth"
-                name="dateOfBirth"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={formData.dateOfBirth}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="address"
-                label="Address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                select
-                fullWidth
-                label="Account Type"
-                name="accountType"
-                value={formData.accountType}
-                onChange={handleChange}
-              >
-                <MenuItem value="customer">Customer</MenuItem>
-                <MenuItem value="vendor">Vendor</MenuItem>
-                <MenuItem value="admin">Admin</MenuItem>
-              </TextField>
-            </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" fullWidth variant="contained" color="primary">
-                Register
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Paper>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col xs={12} md={6}>
+         <h4>Register</h4>
+            <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" placeholder="Enter username" name="username" value={formData.username} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" name="email" value={formData.email} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" name="password" value={formData.password} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="firstName">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter first name" name="firstName" value={formData.firstName} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="lastName">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter last name" name="lastName" value={formData.lastName} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="dateOfBirth">
+              <Form.Label>Date of Birth</Form.Label>
+              <Form.Control type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="address">
+              <Form.Label>Address</Form.Label>
+              <Form.Control type="text" placeholder="Enter address" name="address" value={formData.address} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="accountType">
+              <Form.Label>Account Type</Form.Label>
+              <Form.Select name="accountType" value={formData.accountType} onChange={handleChange}>
+                <option value="customer">Customer</option>
+                <option value="vendor">Vendor</option>
+                <option value="admin">Admin</option>
+              </Form.Select>
+            </Form.Group>
+            <Button variant="primary" type="submit" className="mb-3">
+              Register
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     </Container>
   );
 };
