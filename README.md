@@ -32,7 +32,7 @@
 
 **Clone the repository**
 
-      ```sh
+      ``` sh
       git clone https://github.com/Nitin2806/CondorMarket.git
       cd CondorMarket
 
@@ -41,7 +41,8 @@
 
 Start the server
 
-      ```sh
+      ``` sh
+
       npm start
       
 The frontend server will start on http://localhost:3000.
@@ -73,47 +74,40 @@ The frontend server will start on http://localhost:3000.
 
 ## Project Structure
 
-      ```sh
-      CondorMarket/
-      │
-      ├── backend/
-      │   ├── models/
-      │   │   ├── orderModel.js
-      │   │   ├── productModel.js
-      │   │   └── userModel.js
-      │   ├── routes/
-      │   │   ├── orderRoutes.js
-      │   │   ├── productRoutes.js
-      │   │   └── userRoutes.js
-      │   ├── controllers/
-      │   ├── config/
-      │   ├── middleware/
-      │   ├── .env
-      │   ├── server.js
-      │   └── package.json
-      │
-      ├── frontend/
-      │   ├── public/
-      │   ├── src/
-      │   │   ├── components/
-      │   │   ├── pages/
-      │   │   │   ├── AddProduct.js
-      │   │   │   ├── Customers.js
-      │   │   │   ├── Dashboard.js
-      │   │   │   ├── Login.js
-      │   │   │   ├── OrderDetails.js
-      │   │   │   ├── Orders.js
-      │   │   │   ├── ProductDetails.js
-      │   │   │   ├── Products.js
-      │   │   │   └── Register.js
-      │   │   ├── context/
-      │   │   ├── App.js
-      │   │   └── index.js
-      │   ├── .env
-      │   └── package.json
-      │
-      └── README.md
+      ``` sh
 
+      CondorMarket-Dashboard/
+      ├── public/
+      ├── src/
+      │   ├── assets/
+      │   ├── components/
+      │   │   ├──NavBar.js
+      │   │   ├──ProtectedRoute.js
+      │   ├── pages/
+      │   │   ├── AddProduct.js
+      │   │   ├── Dashboard.js
+      │   │   ├── Login.js
+      │   │   ├── NotFound.js
+      │   │   ├── OrderDetails.js
+      │   │   ├── Orders.js
+      │   │   ├── ProductDetails.js
+      │   │   ├── Products.js
+      │   │   ├── Register.js
+      │   │   ├── UserDetails.js
+      │   │   ├── Users.js
+      │   ├── services/
+      │   │   ├──api.js
+      │   ├── store/
+      │   ├── styles/
+      │   ├── App.js
+      │   └── index.js
+      ├── .env.development 
+      ├── .env.development
+      ├── .gitignore
+      ├── package-lock.json
+      ├── package.json
+      └── README.md
+          
 ## API Endpoints
 
 - **Product Routes**
