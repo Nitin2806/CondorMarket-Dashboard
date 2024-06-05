@@ -31,8 +31,8 @@
 
 **Clone the repository**
 
-      git clone https://github.com/Nitin2806/CondorMarket-dashboard.git
-      cd CondorMarket-dashboard
+      git clone https://github.com/Nitin2806/CondorMarket-Dashboard.git
+      cd CondorMarket-Dashboard
       npm i or npm install
 
 ## Running the Application
