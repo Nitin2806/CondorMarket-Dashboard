@@ -8,15 +8,16 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
-    image:'',
+    images: [],
     description: '',
     price: '',
     category: '',
     brand: '',
     specifications: {},
     stock: '',
-    ratings: ''
+    ratings: '',
   });
+  const [newImage, setNewImage] = useState('');
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -25,7 +26,7 @@ const ProductDetails = () => {
         setProduct(response.data);
         setFormData({
           name: response.data.name,
-          image:response.data.image,
+          images: response.data.images || [],
           description: response.data.description,
           price: response.data.price,
           category: response.data.category,
@@ -60,6 +61,27 @@ const ProductDetails = () => {
     }
   };
 
+  const handleImageChange = (e) => {
+    setNewImage(e.target.value);
+  };
+
+  const handleAddImage = () => {
+    if (newImage) {
+      setFormData((prevState) => ({
+        ...prevState,
+        images: [...prevState.images, newImage],
+      }));
+      setNewImage('');
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      images: prevState.images.filter((_, i) => i !== index),
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -77,7 +99,15 @@ const ProductDetails = () => {
       <h4>Product Details</h4>
       <ListGroup>
         <ListGroup.Item><strong>Category:</strong> {product.category}</ListGroup.Item>
-        <ListGroup.Item><strong>Image:</strong> {product.image}</ListGroup.Item>
+        <ListGroup.Item>
+          <strong>Images:</strong>
+          <ul>
+            {console.log(typeof product.images)}
+            {product.images.map((img, index) => (
+              <li key={index}>{img}</li>
+            ))}
+          </ul>
+        </ListGroup.Item>
         <ListGroup.Item><strong>Brand:</strong> {product.brand}</ListGroup.Item>
         <ListGroup.Item><strong>Price:</strong> ${product.price}</ListGroup.Item>
         <ListGroup.Item><strong>Description:</strong> {product.description}</ListGroup.Item>
@@ -101,28 +131,34 @@ const ProductDetails = () => {
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} />
         </Form.Group>
-        <Form.Group controlId="formImage">
-          <Form.Label>Image URL</Form.Label>
-          <Form.Control type="text" name="image" value={formData.image} onChange={handleChange} />
+        <Form.Group controlId="formImages">
+          <Form.Label>Images</Form.Label>
+          <ul>
+            {formData.images.map((img, index) => (
+              <li key={index}>
+                {img}
+                <Button variant="danger" size="sm" onClick={() => handleRemoveImage(index)}>Remove</Button>
+              </li>
+            ))}
+          </ul>
+          <Form.Control type="text" value={newImage} onChange={handleImageChange} placeholder="Add new image URL" />
+          <Button variant="secondary" onClick={handleAddImage}>Add Image</Button>
         </Form.Group>
         <Form.Group controlId="formDescription">
           <Form.Label>Description</Form.Label>
           <Form.Control as="textarea" rows={3} name="description" value={formData.description} onChange={handleChange} />
         </Form.Group>
         {Object.keys(formData.specifications).map((specKey) => (
-           <Form.Group>
-          <Form.Label>{specKey}</Form.Label>
+          <Form.Group key={specKey} controlId={`formSpec-${specKey}`}>
+            <Form.Label>{specKey}</Form.Label>
             <Form.Control
-              key={specKey}
-              label={specKey}
+              type="text"
               name={specKey}
               value={formData.specifications[specKey]}
               onChange={handleChange}
-              fullWidth
-              margin="normal"
             />
-            </Form.Group>
-          ))}
+          </Form.Group>
+        ))}
         <Button variant="primary" type="submit">
           Update Product
         </Button>

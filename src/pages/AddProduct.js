@@ -25,7 +25,7 @@ const AddProduct = () => {
   const [category, setCategory] = useState('');
   const [formData, setFormData] = useState({
     name: '',
-    image: '',
+    images: [''],
     description: '',
     price: '',
     category: '',
@@ -52,7 +52,20 @@ const AddProduct = () => {
     setCategory(e.target.value);
     setFormData({ ...formData, category: e.target.value, specifications: {} });
   };
+  const handleImageChange = (e, index) => {
+    const newImages = [...formData.images];
+    newImages[index] = e.target.value;
+    setFormData({ ...formData, images: newImages });
+  };
 
+  const handleAddImage = () => {
+    setFormData({ ...formData, images: [...formData.images, ''] });
+  };
+
+  const handleRemoveImage = (index) => {
+    const newImages = formData.images.filter((_, i) => i !== index);
+    setFormData({ ...formData, images: newImages });
+  };
   const handleAddProduct = async (e) => {
     e.preventDefault();
     try {
@@ -75,10 +88,20 @@ const AddProduct = () => {
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="image">
-              <Form.Label>Image URL</Form.Label>
-              <Form.Control type="text" name="image" value={formData.image} onChange={handleInputChange} />
-            </Form.Group>
+            <Form.Label>Images</Form.Label>
+            {formData.images.map((image, index) => (
+              <Row key={index} className="mb-3">
+                <Col>
+                  <Form.Group controlId={`image-${index}`}>
+                    <Form.Control type="text" value={image} onChange={(e) => handleImageChange(e, index)} placeholder={`Image URL ${index + 1}`} />
+                  </Form.Group>
+                </Col>
+                <Col xs="auto">
+                  <Button variant="danger" onClick={() => handleRemoveImage(index)}>Remove</Button>
+                </Col>
+              </Row>
+            ))}
+            <Button variant="secondary" onClick={handleAddImage}>Add Image</Button>
           </Col>
         </Row>
         <Row>
